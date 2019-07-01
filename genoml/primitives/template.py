@@ -42,7 +42,7 @@ def arg_parse():
 
 def main():
     flags = arg_parse()
-    compute(prune_prefix=flags.prune_prefix, impute_data=flags.impute_data, rank_features=flags.rank_features)
+    compute(**vars(flags))
 
 
 if __name__ == "__main__":
