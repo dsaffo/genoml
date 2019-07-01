@@ -4,6 +4,8 @@ import argparse
 
 __author__ = 'Sayed Hadi Hashemi'
 """
+Replacing trainDisc.R
+
 Input:
 prefix = args[6]                -> prune_prefix
 ncores = args[7]                -> REMOVED
