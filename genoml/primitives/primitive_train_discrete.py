@@ -16,7 +16,18 @@ NEW                             -> rank_features
 output:
 _bestModel.RData                -> best_model.pickle
 _newModel.RData                 -> REMOVED
+.nzv                            -> REMOVED
+.highCor                        -> REMOVED
 NEW                             -> metadata.json
+_methodPerformance.tab          -> .training_withheldSamples_performanceMetrics.csv
+_bestModel.algorithm            -> .best_algorithm.txt
+_plotRocNoCI.png                -> .trainedModel_withheldSample_ROC.png
+_plotRoc.png                    -> REMOVED
+_trainingSetPredictions.tab     -> .trainedModel_withheldSample_Predictions.csv
+NEW                             -> .trainedModel_trainingSample_Predictions.csv
+_plotDensity.png                -> .trainedModel_withheldSample_probabilities.png
+_varImp.tab                     -> .trainedModel_trainingSample_featureImportance.csv
+_methodTimings.tab              -> REMOVED
 """
 
 
