@@ -17,6 +17,14 @@ output:
 _bestModel.RData                -> best_model.pickle
 _newModel.RData                 -> REMOVED
 NEW                             -> metadata.json
+.nzv                            -> REMOVED
+.highCor                        -> REMOVED
+_methodPerformance.tab          -> .training_withheldSamples_performanceMetrics.csv
+_methodTimings.tab              -> REMOVED
+_bestModel.algorithm            -> .best_algorithm.txt
+_varImp.tab                     -> .trainedModel_trainingSample_featureImportance.csv
+_trainingSetPredictions.tab     -> .trainedModel_withheldSample_Predictions.csv
+_plotRegs.png                   -> .trainedModel_withheldSample_regression.png
 """
 
 
