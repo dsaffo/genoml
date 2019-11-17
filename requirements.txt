@@ -1,6 +1,0 @@
-rpy2
-docopt
-pandas_plink
-numpy
-requests
-tqdm

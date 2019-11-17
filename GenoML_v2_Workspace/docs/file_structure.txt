@@ -1,0 +1,56 @@
+# GenoML v2 File Structure 
+## Author(s): Mary B. Makarious and Mike A. Nalls
+## Description: This is the working file structure for the GenoML v2 package 
+
+GenoML
+├── README.md
+├── LICENSE.txt
+├── GenoML.py 
+├── __init__.py
+├── requirements.txt
+├── utils.py
+├── docs/
+│   └── file_structure.txt
+├── preprocessing/
+│   ├── input_data.py
+│   └── munging.py
+├── test_data/
+│   ├── continuous_example.dataForML
+│   └── discrete_example.dataForML
+├── discrete/
+│   ├── supervised/
+│   │   ├── train/
+│   │   │   ├── __init__.py
+│   │   │   └── [modules]
+│   │   ├── tune/
+│   │   │   ├── __init__.py
+│   │   │   └── [modules]
+│   │   └── test/
+│   │       ├── __init__.py
+│   │       └── [modules]
+│   └── unsupervised/
+│       └── __init__.py
+│           └── [modules]
+├── continous/
+│   ├── supervised/
+│   │   ├── train/
+│   │   │   ├── __init__.py
+│   │   │   └── [modules]
+│   │   ├── tune/
+│   │   │   ├── __init__.py
+│   │   │   └── [modules]
+│   │   └── test/
+│   │       ├── __init__.py
+│   │       └── [modules]
+│   └── unsupervised/
+│       ├── __init__.py
+│       └── ???
+│           └── [modules]
+├── model_zoo
+│   └── ???
+├── experimental/
+│   ├── ???
+│   └── notebooks/
+└── helpers/
+    ├── docker
+    └── ci
