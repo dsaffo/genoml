@@ -1,4 +1,4 @@
-# GenoML v3 Python Refactoring 
+# GenoML v2 Python Refactoring 
 Branch Breakdown:
 1. The workspace folder is the setup I have for my Visual Studio code so if you open it there things should be a lot easier 
 2. I added the necessary example data but to test things the way I am testing them please see the `GettingStarted.sh` script 
