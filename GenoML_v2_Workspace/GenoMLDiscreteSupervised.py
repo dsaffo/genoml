@@ -83,10 +83,16 @@ print("As a note, in all exported probabilities and other graphics, case status 
 
 print("")
 
+run_prefix = args.prefix
+infile_h5 = run_prefix + ".dataForML.h5"
+df = pd.read_hdf(infile_h5, key = "dataForML")
+
 y_tune = df.PHENO
 X_tune = df.drop(columns=['PHENO'])
 IDs_tune = X_tune.ID
 X_tune = X_tune.drop(columns=['ID'])
+
+
 
 best_algo_name_in = run_prefix + '.best_algorithm.txt'
 best_algo_df = pd.read_csv(best_algo_name_in, header=None, index_col=False)
@@ -98,10 +104,10 @@ cv_count = args.n_cv
 print("From previous analyses in the training phase, we've determined that the best algorithm for this application is", best_algo, " ... so let's tune it up and see what gains we can make!")
 
 # Tuning 
-model_tune = tune(run_prefix, X_tune, y_tune, IDs_tune, max_iter, cv_count)
-model_tune.select_tuning_parameters(winner)
+model_tune = tune(run_prefix, X_tune, y_tune, IDs_tune, max_iter, cv_count, winner)
+model_tune.select_tuning_parameters()
 model_tune.apply_tuning_parameters()
-model_tune.report_tune(rand_search.cv_results_)
+model_tune.report_tune()
 model_tune.summarize_tune()
 model_tune.compare_performance()
 model_tune.ROC()  
