@@ -1,12 +1,10 @@
 CURRENTLY WORKING ON:
-- For tuning: fix apply_tuning_parameters and report_tune with the randomized search (algo need to be returned?)
-    - Need to pass the appropriate variables from train to tune next to try to fix this^^
+- Fix PLINK issue (PLINK has a redistributable license - just add to GenoML package and export PATH?)
 
 CRUCIAL:
-- Fix PLINK issue (PLINK has a redistributable license - just add to GenoML package and export PATH?)
 - Add VIF calculation
-- Add appropriate returns to tuning.py 
 - Address all FutureWarnings brought up in the training.py script (genoml.discrete.supervised.training)
+    - These will likely cause issues for users in the future 
 
 SECONDARY:
 - Insert switch to check Python 3.7 
@@ -24,9 +22,23 @@ LAST:
 - Make text more user-friendly
 - Make a small tutorial 
 
-FUTURE:
-- Add Hampton's cross-validation ?
-- Add Hampton's UKBB script ?
-
 DONE:
 - Figure out how to easily install xgboost (done and updated the requirements file)
+- Discrete train has been refactored
+- Discrete tune has been refactored 
+
+###
+TODO:
+- Refactoring:
+    - Munging 
+        - Still need to add VIF
+    - Discrete
+        - Train 
+        - Tune 
+        - Test (needs to be added)
+    - Continuous
+        - Train
+        - Tune
+        - Test (needs to be added)
+    - Add in Mike's additional switches 
+    - Add in Hampton's UKBB script 
