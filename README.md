@@ -14,6 +14,7 @@ Branch Breakdown:
 - Add VIF calculation
 - Address all FutureWarnings brought up in the training.py script (genoml.discrete.supervised.training)
     - These will likely cause issues for users in the future 
+- Refactor continuous train + tune
 
 ### SECONDARY:
 - Insert switch to check Python 3.7 
@@ -33,6 +34,7 @@ Branch Breakdown:
 
 ### DONE:
 - Easily install xgboost -- Done and updated the requirements file
+- Munging has been refactored -- working on PLINK path issue + adding VIF 
 - Discrete train has been refactored -- Some clean-up necessary
 - Discrete tune has been refactored -- Some clean-up necessary
 

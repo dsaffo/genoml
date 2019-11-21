@@ -12,15 +12,6 @@ pip install .
 # Saving out environment requirements to a .txt file
 #pip freeze > requirements.txt
 
-# Installing from a requirements file using conda
-#while read requirement; do conda install --yes $requirement; done < requirements.txt
-
-# Saving out environment requirements to a .txt file
-#conda list > requirements.txt
-
-# Installing xgboost
-conda install -c anaconda py-xgboost
-
 # Running the munging script
 python GenoMLMunging.py --prefix ./output/test_discrete_geno --geno examples/training --pheno examples/training_pheno.csv
     # FIXME: Need to download PLINK and export to path prior to running this to make the .raw file
@@ -33,3 +24,11 @@ python GenoMLDiscreteSupervised.py --prefix ./examples/test_discrete_geno --max-
 
 # Removing a conda virtualenv
 conda remove --name genoML --all
+
+
+###
+# Installing from a requirements file using conda
+#while read requirement; do conda install --yes $requirement; done < requirements.txt
+
+# Saving out environment requirements to a .txt file
+#conda list > requirements.txt
