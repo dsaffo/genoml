@@ -18,6 +18,10 @@ from statsmodels.tools.tools import add_constant
 from genoml.preprocessing import utils, munging
 
 if __name__ == "__main__":
+
+    # Adding PLINK to user path
+    ## STILL TROUBLESHOOTING
+
     # Create the arguments
     parser = argparse.ArgumentParser(
         description="Arguments for building a training dataset for GenoML.")
@@ -43,14 +47,11 @@ if __name__ == "__main__":
     # Process the arguments
     args = parser.parse_args()
     run_prefix = args.prefix
-
     utils.print_config(args)
     pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df = utils.parse_args(args)
 
+    # Run the munging script in genoml.preprocessing 
     munger = munging(pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, args)
 
-    munger.plinker()
-
-   
-
-    # etc etc
+    # Process the PLINK inputs (for pruning)
+    munger.plink_inputs()

@@ -151,6 +151,7 @@ class tune():
         return rand_search.cv_results_
 
     def report_tune(self):
+        # Summary of the top 10 iterations of the hyperparameter tune
         n_top=10
         results = self.searchCVResults
         for i in range(1, n_top + 1):

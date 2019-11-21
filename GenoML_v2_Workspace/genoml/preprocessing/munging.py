@@ -13,7 +13,7 @@ class munging:
         self.run_prefix = run_prefix
         self.args = args
 
-    def plinker(self):
+    def plink_inputs(self):
         # Set the bashes
         bash1a = "plink --bfile " + self.geno_path + " --indep-pairwise 1000 50 0.05"
         bash1b = "plink --bfile " + self.geno_path + " --extract " + self.run_prefix + ".p_threshold_variants.tab" + " --indep-pairwise 1000 50 0.05"
@@ -55,5 +55,3 @@ class munging:
             raw_df.drop(columns=['FID','MAT','PAT','SEX','PHENOTYPE'], inplace=True)
             raw_df.rename(columns={'IID':'ID'}, inplace=True)
             subprocess.run(bash6, shell=True)
-
-        print("hello") #TODO: Have a proper output here

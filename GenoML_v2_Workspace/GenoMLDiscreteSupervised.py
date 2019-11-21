@@ -71,6 +71,10 @@ model.AUC()
 model.export_prob_hist()
 rfe = model.feature_ranking()
 
+print()
+print("End of training stage with GenoML.")
+print()
+
 # TUNING
 # Create a dialogue with the user 
 print("Here is some basic info on the command you are about to run.")
@@ -93,7 +97,6 @@ IDs_tune = X_tune.ID
 X_tune = X_tune.drop(columns=['ID'])
 
 
-
 best_algo_name_in = run_prefix + '.best_algorithm.txt'
 best_algo_df = pd.read_csv(best_algo_name_in, header=None, index_col=False)
 best_algo = str(best_algo_df.iloc[0,0])
@@ -101,19 +104,20 @@ max_iter = args.max_tune
 cv_count = args.n_cv
 
 # Communicate to the user the best identified algorithm 
-print("From previous analyses in the training phase, we've determined that the best algorithm for this application is", best_algo, " ... so let's tune it up and see what gains we can make!")
+print(f"From previous analyses in the training phase, we've determined that the best algorithm for this application is {best_algo}... so let's tune it up and see what gains we can make!")
 
 # Tuning 
+## This calls on the functions made in the tune class (tuning.py) at the genoml.discrete.supervised 
 model_tune = tune(run_prefix, X_tune, y_tune, IDs_tune, max_iter, cv_count, winner)
-model_tune.select_tuning_parameters()
-model_tune.apply_tuning_parameters()
-model_tune.report_tune()
-model_tune.summarize_tune()
-model_tune.compare_performance()
-model_tune.ROC()  
-model_tune.export_tuned_data()
+model_tune.select_tuning_parameters() # Returns algo, hyperparameters, and scoring_metric
+model_tune.apply_tuning_parameters() # Randomized search with CV to tune
+model_tune.report_tune() #  Summary of the top 10 iterations of the hyperparameter tune
+model_tune.summarize_tune() # Summary of the cross-validation 
+model_tune.compare_performance() # Compares tuned performance to baseline to 
+model_tune.ROC()  # Export the ROC curve 
+model_tune.export_tuned_data() # Export the exported predictions 
 model_tune.export_tune_hist_prob()
 
 print()
-print("Let's shut everything down, thanks for trying to tune your model with GenoML.")
+print("End of tuning stage with GenoML.")
 print()
