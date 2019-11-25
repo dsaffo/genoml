@@ -8,10 +8,9 @@ Branch Breakdown:
 
 # TODO List 
 ### CURRENTLY WORKING ON:
-- Fix PLINK issue (PLINK has a redistributable license - just add to GenoML package and export PATH?)
+- Add VIF calculation to munging script
 
 ### CRUCIAL:
-- Add VIF calculation
 - Address all FutureWarnings brought up in the training.py script (genoml.discrete.supervised.training)
     - These will likely cause issues for users in the future 
 - Refactor continuous train + tune
@@ -37,6 +36,7 @@ Branch Breakdown:
 - Munging has been refactored -- working on PLINK path issue + adding VIF 
 - Discrete train has been refactored -- Some clean-up necessary
 - Discrete tune has been refactored -- Some clean-up necessary
+- Fix PLINK issue (PLINK has a redistributable license - just added to GenoML package and export PATH)
 
 ### TODO:
 - Refactoring:

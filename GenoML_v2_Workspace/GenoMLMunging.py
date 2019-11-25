@@ -17,10 +17,13 @@ from statsmodels.tools.tools import add_constant
 
 from genoml.preprocessing import utils, munging
 
-if __name__ == "__main__":
+# Adding PLINK to user path
+filename = "plink"
+directory = os.getcwd() + "/" + filename
+os.environ["PATH"] = os.environ["PATH"] + os.pathsep + directory
+subprocess.run("plink --help", shell=True)
 
-    # Adding PLINK to user path
-    ## STILL TROUBLESHOOTING
+if __name__ == "__main__":
 
     # Create the arguments
     parser = argparse.ArgumentParser(
