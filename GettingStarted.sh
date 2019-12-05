@@ -9,12 +9,14 @@ conda activate genoML
 # Installing from a requirements file using pip
 pip install .
 
+# Exporting the environment to a YAML
+conda env export > environment.yml
+
 # Saving out environment requirements to a .txt file
 #pip freeze > requirements.txt
 
 # Running the munging script
 python GenoMLMunging.py --prefix ./output/test_discrete_geno --geno examples/training --pheno examples/training_pheno.csv
-    # FIXME: Need to download PLINK and export to path prior to running this to make the .raw file
 
 # Running the training script
 python GenoMLDiscreteSupervised.py --prefix ./examples/test_discrete_geno
