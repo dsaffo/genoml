@@ -10,18 +10,19 @@ import subprocess
 import numpy as np
 import pandas as pd
 
-# Additional packages for VIF calculation
+# Importing additional packages necessary for VIF
 import random
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from statsmodels.tools.tools import add_constant
+from joblib import Parallel, delayed
 
+# Importing GenoML specific tools 
 from genoml.preprocessing import utils, munging
 
 # Adding PLINK to user path
 filename = "plink"
 directory = os.getcwd() + "/" + filename
 os.environ["PATH"] = os.environ["PATH"] + os.pathsep + directory
-subprocess.run("plink --help", shell=True)
 
 if __name__ == "__main__":
 

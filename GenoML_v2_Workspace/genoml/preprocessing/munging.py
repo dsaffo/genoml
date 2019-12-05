@@ -18,7 +18,7 @@ class munging:
         bash1a = "plink --bfile " + self.geno_path + " --indep-pairwise 1000 50 0.05"
         bash1b = "plink --bfile " + self.geno_path + " --extract " + self.run_prefix + ".p_threshold_variants.tab" + " --indep-pairwise 1000 50 0.05"
         bash2 = "plink --bfile " + self.geno_path + " --extract plink.prune.in --make-bed --out temp_genos"
-        bash3 = "plink --bfile temp_genos --recodeA --out " + self.run_prefix
+        bash3 = "plink --bfile temp_genos --recode A --out " + self.run_prefix
         bash4 = "cut -f 2,5 temp_genos.bim > " + self.run_prefix + ".variants_and_alleles.tab"
         bash5 = "rm temp_genos.*"
         bash6 = "rm " + self.run_prefix + ".raw"
@@ -55,3 +55,14 @@ class munging:
             raw_df.drop(columns=['FID','MAT','PAT','SEX','PHENOTYPE'], inplace=True)
             raw_df.rename(columns={'IID':'ID'}, inplace=True)
             subprocess.run(bash6, shell=True)
+
+#class vif:
+# Have separate functions for all these things 
+
+
+# parser.add_argument("--vif", type=int, default=0,
+# help="Variance Inflation Factor (VIF): (integer).
+# This is the VIF threshold for pruning non-genotype features.
+# We recommend a value of 5-10. 
+# The default of 0 means no VIF filtering will be done. [default: 0].")
+      
