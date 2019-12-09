@@ -14,6 +14,8 @@ Branch Breakdown:
 - Address all FutureWarnings brought up in the training.py script (genoml.discrete.supervised.training)
     - These will likely cause issues for users in the future 
 - Refactor continuous train + tune
+- Add function that checks OS before running PLINK (Mac and Linux run different PLINK files)
+    - Have both in the GenoML folder but append the right one to path after checking 
 
 ### SECONDARY:
 - Insert switch to check Python 3.7 
