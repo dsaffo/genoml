@@ -9,9 +9,6 @@ conda activate genoML
 # Installing from a requirements file using pip
 pip install .
 
-# Exporting the environment to a YAML
-conda env export > environment.yml
-
 # Saving out environment requirements to a .txt file
 #pip freeze > requirements.txt
 
@@ -29,8 +26,14 @@ conda remove --name genoML --all
 
 
 ###
+# Using pip to save out environment
+#pip freeze > requirements.txt
+
 # Installing from a requirements file using conda
 #while read requirement; do conda install --yes $requirement; done < requirements.txt
 
 # Saving out environment requirements to a .txt file
 #conda list > requirements.txt
+
+# Exporting the environment to a YAML
+#conda env export > environment.yml
