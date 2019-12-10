@@ -1,56 +1,74 @@
 # GenoML v2 File Structure 
 ## Author(s): Mary B. Makarious and Mike A. Nalls
 ## Description: This is the working file structure for the GenoML v2 package 
-
-GenoML
-├── README.md
+.
+├── GenoMLDiscreteSupervised.py
+├── GenoMLMunging.py
 ├── LICENSE.txt
-├── GenoML.py 
-├── __init__.py
+├── README.md
 ├── requirements.txt
-├── utils.py
-├── docs/
+├── genoml
+│   ├── continuous
+│   │   ├── supervised
+│   │   │   ├── training
+│   │   │   │   └── __init__.py
+│   │   │   ├── tuning
+│   │   │   │   └── __init__.py
+│   │   │   ├── __init__.py
+│   │   │   └── .DS_Store
+│   │   ├── __init__.py
+│   │   └── .DS_Store
+│   ├── discrete
+│   │   ├── supervised
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-37.pyc
+│   │   │   │   ├── training.cpython-37.pyc
+│   │   │   │   └── tuning.cpython-37.pyc
+│   │   │   ├── __init__.py
+│   │   │   ├── .DS_Store
+│   │   │   ├── training.py
+│   │   │   └── tuning.py
+│   │   └── __init__.py
+│   ├── preprocessing
+│   │   ├── __init__.py
+│   │   ├── munging.py
+│   │   └── utils.py
+│   ├── __init__.py
+│   ├── check_dependencies.py
+│   └── utils.py
+├── plink
+│   ├── linux
+│   │   ├── LICENSE
+│   │   └── plink
+│   ├── mac
+│   │   ├── LICENSE
+│   │   └── plink
+│   └── .DS_Store
+├── docs
+│   ├── .DS_Store
 │   └── file_structure.txt
-├── preprocessing/
-│   ├── input_data.py
-│   └── munging.py
-├── test_data/
+├── examples
 │   ├── continuous_example.dataForML
-│   └── discrete_example.dataForML
-├── discrete/
-│   ├── supervised/
-│   │   ├── train/
-│   │   │   ├── __init__.py
-│   │   │   └── [modules]
-│   │   ├── tune/
-│   │   │   ├── __init__.py
-│   │   │   └── [modules]
-│   │   └── test/
-│   │       ├── __init__.py
-│   │       └── [modules]
-│   └── unsupervised/
-│       └── __init__.py
-│           └── [modules]
-├── continous/
-│   ├── supervised/
-│   │   ├── train/
-│   │   │   ├── __init__.py
-│   │   │   └── [modules]
-│   │   ├── tune/
-│   │   │   ├── __init__.py
-│   │   │   └── [modules]
-│   │   └── test/
-│   │       ├── __init__.py
-│   │       └── [modules]
-│   └── unsupervised/
-│       ├── __init__.py
-│       └── ???
-│           └── [modules]
-├── model_zoo
-│   └── ???
-├── experimental/
-│   ├── ???
-│   └── notebooks/
-└── helpers/
-    ├── docker
-    └── ci
+│   ├── discrete_example.dataForML
+│   ├── test_discrete_geno.best_algorithm.txt
+│   ├── test_discrete_geno.dataForML.h5
+│   ├── test_discrete_geno.trainedModel_trainingSample_featureImportance.csv
+│   ├── test_discrete_geno.trainedModel_trainingSample_Predictions.csv
+│   ├── test_discrete_geno.trainedModel_withheldSample_Predictions.csv
+│   ├── test_discrete_geno.trainedModel_withheldSample_probabilities.png
+│   ├── test_discrete_geno.trainedModel_withheldSample_ROC.png
+│   ├── test_discrete_geno.trainedModel.joblib
+│   ├── test_discrete_geno.training_withheldSamples_performanceMetrics.csv
+│   ├── test_discrete_geno.tunedModel_allSample_Predictions.csv
+│   ├── test_discrete_geno.tunedModel_allSample_probabilities.png
+│   ├── test_discrete_geno.tunedModel_allSample_ROC.png
+│   ├── test_discrete_geno.tunedModel.joblib
+│   ├── test_discrete_geno.variants_and_alleles.tab
+│   ├── training_addit.csv
+│   ├── training_pheno.csv
+│   ├── training.bed
+│   ├── training.bim
+│   ├── training.fam
+│   └── training.variants_and_alleles.tab
+├── setup.py
+└── utils.py
