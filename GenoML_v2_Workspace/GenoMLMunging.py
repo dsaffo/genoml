@@ -9,6 +9,7 @@ import joblib
 import subprocess
 import numpy as np
 import pandas as pd
+from sys import platform
 
 # Importing additional packages necessary for VIF
 import random
@@ -19,10 +20,29 @@ from joblib import Parallel, delayed
 # Importing GenoML specific tools 
 from genoml.preprocessing import utils, munging
 
-# Adding PLINK to user path
-filename = "plink"
-directory = os.getcwd() + "/" + filename
-os.environ["PATH"] = os.environ["PATH"] + os.pathsep + directory
+# Check the platform to load the right PLINK to path
+    # This will load a PLINK v1.9 
+def get_platform():
+    platforms = {
+        "linux" : "linux",
+        "linux1" : "linux",
+        "linux2" : "linux",
+        "darwin" : "mac"
+    }
+    if sys.platform not in platforms:
+        return "GenoML is not supported on this platform. Please try Mac or Linux"
+    elif platforms[sys.platform] == "mac":
+        filename_mac = "plink/mac/"
+        directory_mac = os.getcwd() + "/" + filename_mac
+        os.environ["PATH"] = os.environ["PATH"] + os.pathsep + directory_mac
+    else:
+        filename_linux = "plink/linux/"
+        directory_linux = os.getcwd() + "/" + filename_linux
+        os.environ["PATH"] = os.environ["PATH"] + os.pathsep + directory_linux
+    return print("PLINK has successfully been loaded to your path!")
+
+# Run and get the proper PLINK to path
+get_platform()
 
 if __name__ == "__main__":
 
