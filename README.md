@@ -9,6 +9,7 @@ Branch Breakdown:
 # TODO List 
 ### CURRENTLY WORKING ON:
 - Add VIF calculation to munging script
+- Finishing up the munging script
 
 ### CRUCIAL:
 - Address all FutureWarnings brought up in the training.py script (genoml.discrete.supervised.training)
@@ -30,6 +31,9 @@ Branch Breakdown:
 - Fix grammatical/spelling errors 
 - Make text more user-friendly
 - Make a small tutorial 
+  
+### UPCOMING: 
+- Add Kipoi integration? (Exporting and Importing?)
 
 ### DONE:
 - Easily install xgboost -- Done and updated the requirements file
