@@ -41,6 +41,9 @@ def parse_args(args):
     addit_df = None
     gwas_df = None
 
+    # Other argument initializations 
+    impute_type = args.impute
+    
     # Dataframe loading based on arguments
     if (pheno_path == "lost"):
         print("Looks like you lost your phenotype file. Just give up because you are currently don't have anything to predict.")
@@ -63,4 +66,4 @@ def parse_args(args):
         print("Pruning your data and exporting a reduced set of genotypes.")
 
     # Return populated variables
-    return pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df
+    return pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, impute_type 

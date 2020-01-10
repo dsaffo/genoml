@@ -64,7 +64,7 @@ if __name__ == "__main__":
     parser.add_argument("--vif", type=int, default=0,
                         help="Variance Inflation Factor (VIF): (integer). This is the VIF threshold for pruning non-genotype features. We recommend a value of 5-10. The default of 0 means no VIF filtering will be done. [default: 0].")
     parser.add_argument("--iter", type=int, default=0,
-                        help="Iterator: (integer). How many iterations of VIF pruning of features do you want to run. To save time VIF is run in randomly assorted chunks of 1000 features per iteration. The default of 0 means only one pass through the data. [default: 0].")
+                        help="Iterator: (integer). How many iterations of VIF pruning of features do you want to run. To save time VIF is run in randomly assorted chunks of 1000 features per iteration. The default of 1 means only one pass through the data. [default: 1].")
     parser.add_argument("--impute", type=str, default="median",
                         help="Imputation: (mean, median). Governs secondary imputation and data transformation [default: median].")
 
@@ -72,10 +72,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     run_prefix = args.prefix
     utils.print_config(args)
-    pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df = utils.parse_args(args)
+    pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, impute_type = utils.parse_args(args)
 
     # Run the munging script in genoml.preprocessing 
-    munger = munging(pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, args)
+    munger = munging(pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, impute_type, args)
 
     # Process the PLINK inputs (for pruning)
     munger.plink_inputs()

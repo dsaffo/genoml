@@ -31,7 +31,7 @@ args = parser.parse_args()
 print("")
 print("Here is some basic info on the command you are about to run.")
 print("Python Version info...")
-print(sys.version) #TODO: Add switch here to only run in Python 3.x 
+print(sys.version) #TODO: Add switch here to only run in Python 3.x (is this necessary? pip will check...?)
 
 print("CLI argument info...")
 print("Are you ranking features, even though it is pretty slow? Right now, GenoML runs general recursive feature ranking. You chose to", args.rank_features, "this part.")

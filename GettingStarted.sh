@@ -13,7 +13,16 @@ pip install .
 #pip freeze > requirements.txt
 
 # Running the munging script
-python GenoMLMunging.py --prefix ./output/test_discrete_geno --geno examples/training --pheno examples/training_pheno.csv
+python GenoMLMunging.py --prefix ./output/test_discrete_geno \
+--geno examples/training \
+--pheno examples/training_pheno.csv
+
+# Running the munging script with VIF filtering 
+python GenoMLMunging.py --prefix ./output/test_discrete_geno \
+--geno examples/training \
+--pheno examples/training_pheno.csv \
+--vif 5 \
+--iter 1
 
 # Running the training script
 python GenoMLDiscreteSupervised.py --prefix ./examples/test_discrete_geno

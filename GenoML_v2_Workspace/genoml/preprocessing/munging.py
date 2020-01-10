@@ -2,7 +2,7 @@ import subprocess
 import pandas as pd
 
 class munging:
-    def __init__(self, pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, args):
+    def __init__(self, pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, impute_type, args):
         self.pheno_path = pheno_path
         self.addit_path = addit_path
         self.gwas_path = gwas_path
@@ -11,6 +11,7 @@ class munging:
         self.addit_df = addit_df
         self.gwas_df = gwas_df
         self.run_prefix = run_prefix
+        self.impute_type = impute_type
         self.args = args
 
     def plink_inputs(self):
@@ -56,13 +57,17 @@ class munging:
             raw_df.rename(columns={'IID':'ID'}, inplace=True)
             subprocess.run(bash6, shell=True)
 
-#class vif:
-# Have separate functions for all these things 
+        impute_type = self.impute_type
 
-
-# parser.add_argument("--vif", type=int, default=0,
-# help="Variance Inflation Factor (VIF): (integer).
-# This is the VIF threshold for pruning non-genotype features.
-# We recommend a value of 5-10. 
-# The default of 0 means no VIF filtering will be done. [default: 0].")
-      
+        if (self.geno_path != "nope"):
+            if impute_type == 'mean': 
+                raw_df = raw_df.fillna(raw_df.mean())
+            if impute_type == 'median':
+                raw_df = raw_df.fillna(raw_df.median())
+            print("")
+            print("You have just imputed your genotype features, covering up NAs with the column", impute_type, "so that analyses don't crash due to missing data.")
+            print("Now your genotype features might look a little better (showing the first few lines of the left-most and right-most columns)...")
+            print("#"*70)
+            print(raw_df.describe())
+            print("#"*70)
+            print("")
