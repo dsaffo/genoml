@@ -43,6 +43,10 @@ Branch Breakdown:
 - Fix PLINK issue (PLINK has a redistributable license - just added to GenoML package and export PATH)
 - Add function that checks OS before running PLINK (Mac and Linux run different PLINK files)
     - Have both in the GenoML folder but append the right one to path after checking 
+- MUNGING UPDATES
+  - Added functionality to impute the dataframe 
+  - Added functionality to incorporate addit file with non-genotypes and be able to impute and Z-scale them 
+  - Added functionality to export HDF5 file internally
 
 
 ### TODO:
