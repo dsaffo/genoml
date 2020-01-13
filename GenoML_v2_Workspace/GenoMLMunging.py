@@ -81,7 +81,8 @@ if __name__ == "__main__":
     munger.plink_inputs()
 
     # If the imputation flags are set, run to impute based on user input 
-    # munger.imputation() ##TODO: Make this into a separate function to call?
+    # munger.imputation()
+        ##TODO: Make this into a separate function to call?
 
     # Run the VIF calculation 
-    
+        ##TODO: Make the separate class 
