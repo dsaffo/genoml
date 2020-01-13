@@ -56,11 +56,12 @@ class munging:
             raw_df.rename(columns={'IID':'ID'}, inplace=True)
             subprocess.run(bash6, shell=True)
 
-        # Checking to see impute argument and execute
+        # Checking the impute flag and execute
             # Currently only supports mean and median 
         impute_type = self.impute_type
 
         impute_list = ["mean", "median"]
+
         if impute_type not in impute_list:
             return "The 2 types of imputation currently supported are 'mean' and 'median'"
         elif impute_type.lower() == "mean":
@@ -74,3 +75,38 @@ class munging:
         print(raw_df.describe())
         print("#"*70)
         print("")
+
+    # Checking the imputation of non-genotype features 
+        addit_df = self.addit_df
+
+        if (self.addit_path != "nope"):
+            if impute_type not in impute_list:
+                return "The 2 types of imputation currently supported are 'mean' and 'median'"
+            elif impute_type.lower() == "mean":
+                addit_df = addit_df.fillna(addit_df.mean())
+            elif impute_type.lower() == "median":
+                addit_df = addit_df.fillna(addit_df.median())
+            print("")
+            print(f"You have just imputed your non-genotype features, covering up NAs with the column {impute_type} so that analyses don't crash due to missing data.")
+            print("Now your non-genotype features might look a little better (showing the first few lines of the left-most and right-most columns)...")
+            print("#"*70)
+            print(addit_df.describe())
+            print("#"*70)
+            print("")
+
+            print("")
+            cols = list(addit_df.columns)
+            cols.remove('ID')
+            addit_df[cols]
+
+            for col in cols:
+                if (addit_df[col].min() != 0) & (addit_df[col].max() != 1):
+                    addit_df[col] = (addit_df[col] - addit_df[col].mean())/addit_df[col].std(ddof=0)
+
+            print("")
+            print("You have just Z-scaled your non-genotype features, putting everything on a numeric scale similar to genotypes.")
+            print("Now your non-genotype features might look a little closer to zero (showing the first few lines of the left-most and right-most columns)...")
+            print("#"*70)
+            print(addit_df.describe())
+            print("#"*70)
+            print("")
