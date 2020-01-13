@@ -1,12 +1,9 @@
 import pandas as pd
 import sys
 
-# Function to check the dependencies
-
-
-def check_depenencies(a, b, c):
+#TODO: Function to check the dependencies 
+def check_dependencies(a, b, c):
     pass
-
 
 def print_config(args):
     # Print out the formatted arguments
@@ -43,7 +40,7 @@ def parse_args(args):
 
     # Other argument initializations 
     impute_type = args.impute
-    
+
     # Dataframe loading based on arguments
     if (pheno_path == "lost"):
         print("Looks like you lost your phenotype file. Just give up because you are currently don't have anything to predict.")
