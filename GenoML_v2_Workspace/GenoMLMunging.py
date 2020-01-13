@@ -79,3 +79,6 @@ if __name__ == "__main__":
 
     # Process the PLINK inputs (for pruning)
     munger.plink_inputs()
+
+    # If the imputation flags are set, run to impute based on user input 
+    # munger.imputation() ##TODO: Make this into a separate function to call?

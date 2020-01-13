@@ -1,5 +1,9 @@
+# Import the necessary packages 
 import subprocess
 import pandas as pd
+
+# Importing GenoML specific tools 
+from genoml.preprocessing import utils
 
 class munging:
     def __init__(self, pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, impute_type, args):
@@ -15,6 +19,14 @@ class munging:
         self.args = args
 
     def plink_inputs(self):
+        # Initializing some variables 
+        impute_type = self.impute_type
+        addit_df = self.addit_df
+        pheno_df = self.pheno_df
+        
+        outfile_h5 = self.run_prefix + ".dataForML.h5"
+        pheno_df.to_hdf(outfile_h5, key='pheno', mode = 'w')
+
         # Set the bashes
         bash1a = "plink --bfile " + self.geno_path + " --indep-pairwise 1000 50 0.05"
         bash1b = "plink --bfile " + self.geno_path + " --extract " + self.run_prefix + ".p_threshold_variants.tab" + " --indep-pairwise 1000 50 0.05"
@@ -56,9 +68,8 @@ class munging:
             raw_df.rename(columns={'IID':'ID'}, inplace=True)
             subprocess.run(bash6, shell=True)
 
-        # Checking the impute flag and execute
-            # Currently only supports mean and median 
-        impute_type = self.impute_type
+    # Checking the impute flag and execute
+        # Currently only supports mean and median 
 
         impute_list = ["mean", "median"]
 
@@ -77,7 +88,6 @@ class munging:
         print("")
 
     # Checking the imputation of non-genotype features 
-        addit_df = self.addit_df
 
         if (self.addit_path != "nope"):
             if impute_type not in impute_list:
@@ -94,11 +104,12 @@ class munging:
             print("#"*70)
             print("")
 
-            print("")
+            # Remove the ID column 
             cols = list(addit_df.columns)
             cols.remove('ID')
             addit_df[cols]
 
+            # Z-scale the features 
             for col in cols:
                 if (addit_df[col].min() != 0) & (addit_df[col].max() != 1):
                     addit_df[col] = (addit_df[col] - addit_df[col].mean())/addit_df[col].std(ddof=0)
@@ -109,4 +120,27 @@ class munging:
             print("#"*70)
             print(addit_df.describe())
             print("#"*70)
-            print("")
+
+
+
+############################################
+### Experimental ###########################
+############################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
