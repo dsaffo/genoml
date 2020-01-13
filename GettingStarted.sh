@@ -46,3 +46,20 @@ conda remove --name genoML --all
 
 # Exporting the environment to a YAML
 #conda env export > environment.yml
+
+
+
+
+### INTERMEDIATE CHECKS FOR MUNGING SCRIPT
+# Check impute flag 
+python GenoMLMunging.py --prefix ./output/test_discrete_geno \
+--geno examples/training \
+--impute mean \
+--pheno examples/training_pheno.csv
+
+# Check the addit flag
+python GenoMLMunging.py --prefix ./output/test_discrete_geno_addit \
+--geno examples/training \
+--impute mean \
+--addit examples/training_addit.csv \
+--pheno examples/training_pheno.csv
