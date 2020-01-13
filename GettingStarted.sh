@@ -57,9 +57,19 @@ python GenoMLMunging.py --prefix ./output/test_discrete_geno \
 --impute mean \
 --pheno examples/training_pheno.csv
 
-# Check the addit flag
+# Check the addit flag and the Z-scale 
 python GenoMLMunging.py --prefix ./output/test_discrete_geno_addit \
 --geno examples/training \
 --impute mean \
+--addit examples/training_addit.csv \
+--pheno examples/training_pheno.csv
+
+# Check the VIF 
+    # FIXME: Still not working!! 
+python GenoMLMunging.py --prefix ./output/test_discrete_geno_addit_vif \
+--geno examples/training \
+--impute mean \
+--vif 5 \
+--iter 2 \
 --addit examples/training_addit.csv \
 --pheno examples/training_pheno.csv
