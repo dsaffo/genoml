@@ -72,13 +72,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
     run_prefix = args.prefix
     utils.print_config(args)
-    pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, impute_type = utils.parse_args(args)
+    pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, vif, iteration, impute_type = utils.parse_args(args)
 
     # Run the munging script in genoml.preprocessing 
-    munger = munging(pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, impute_type, args)
+    munger = munging(pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, impute_type, vif, iteration, args)
 
     # Process the PLINK inputs (for pruning)
     munger.plink_inputs()
 
     # If the imputation flags are set, run to impute based on user input 
     # munger.imputation() ##TODO: Make this into a separate function to call?
+
+    # Run the VIF calculation 
+    
