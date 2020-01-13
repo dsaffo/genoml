@@ -31,22 +31,21 @@ class munging:
         cmds_a = [bash1a, bash2, bash3, bash4, bash5, bash7, bash8, bash9]
         cmds_b = [bash1b, bash2, bash3, bash4, bash5, bash7, bash8, bash9]
 
-
         if (self.gwas_path != "nope") & (self.geno_path != "nope"):
             p_thresh = self.args.p
             gwas_df_reduced = self.gwas_df[['SNP','p']]
             snps_to_keep = gwas_df_reduced.loc[(gwas_df_reduced['p'] <= p_thresh)]
             outfile = self.run_prefix + ".p_threshold_variants.tab"
             snps_to_keep.to_csv(outfile, index=False, sep = "\t")
-            print("Your candidate variant list prior to pruning is right here", outfile, ".")
+            print(f"Your candidate variant list prior to pruning is right here: {outfile}.")
 
         if (self.gwas_path == "nope") & (self.geno_path != "nope"):
-            print("A list of pruned variants and the allele being counted in the dosages (usually the minor allele) can be found here ", self.run_prefix + ".variants_and_alleles.tab.")
+            print(f"A list of pruned variants and the allele being counted in the dosages (usually the minor allele) can be found here: {self.run_prefix}.variants_and_alleles.tab")
             for cmd in cmds_a:
                 subprocess.run(cmd, shell=True)
 
         if (self.gwas_path != "nope") & (self.geno_path != "nope"):
-            print("A list of pruned variants and the allele being counted in the dosages (usually the minor allele) can be found here", self.run_prefix + ".variants_and_alleles.tab.")
+            print(f"A list of pruned variants and the allele being counted in the dosages (usually the minor allele) can be found here: {self.run_prefix}.variants_and_alleles.tab")
             for cmd in cmds_b:
                 subprocess.run(cmd, shell=True)
 
@@ -57,17 +56,21 @@ class munging:
             raw_df.rename(columns={'IID':'ID'}, inplace=True)
             subprocess.run(bash6, shell=True)
 
+        # Checking to see impute argument and execute
+            # Currently only supports mean and median 
         impute_type = self.impute_type
 
-        if (self.geno_path != "nope"):
-            if impute_type == 'mean': 
-                raw_df = raw_df.fillna(raw_df.mean())
-            if impute_type == 'median':
-                raw_df = raw_df.fillna(raw_df.median())
-            print("")
-            print("You have just imputed your genotype features, covering up NAs with the column", impute_type, "so that analyses don't crash due to missing data.")
-            print("Now your genotype features might look a little better (showing the first few lines of the left-most and right-most columns)...")
-            print("#"*70)
-            print(raw_df.describe())
-            print("#"*70)
-            print("")
+        impute_list = ["mean", "median"]
+        if impute_type not in impute_list:
+            return "The 2 types of imputation currently supported are 'mean' and 'median'"
+        elif impute_type.lower() == "mean":
+            raw_df = raw_df.fillna(raw_df.mean())
+        elif impute_type.lower() == "median":
+            raw_df = raw_df.fillna(raw_df.median())
+        print("")
+        print(f"You have just imputed your genotype features, covering up NAs with the column {impute_type} so that analyses don't crash due to missing data.")
+        print("Now your genotype features might look a little better (showing the first few lines of the left-most and right-most columns)...")
+        print("#"*70)
+        print(raw_df.describe())
+        print("#"*70)
+        print("")
