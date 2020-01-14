@@ -124,7 +124,7 @@ class train:
 
         log_outfile = self.run_prefix + '.training_withheldSamples_performanceMetrics.csv'
 
-        print("This table below is also logged as", log_outfile, "and is in your current working directory...")
+        print(f"This table below is also logged as {log_outfile} and is in your current working directory...")
         print("#"*70)
         print(log_table)
         print("#"*70)
@@ -215,7 +215,7 @@ class train:
 
         print("#"*70)
 
-        print("... this model has been saved as", algo_out, "for later use and can be found in your working directory.")
+        print(f"... this model has been saved as {algo_out} for later use and can be found in your working directory.")
 
         self.algo = algo
 
@@ -242,7 +242,7 @@ class train:
         plt.savefig(plot_out, dpi = 600)
 
         print()
-        print("We are also exporting a ROC curve for you here", plot_out, "this is a graphical representation of AUC in the withheld test data for the best performing algorithm.")
+        print(f"We are also exporting a ROC curve for you here {plot_out} this is a graphical representation of AUC in the withheld test data for the best performing algorithm.")
 
     def export_prob_hist(self):
         # Exporting withheld test data
@@ -294,8 +294,7 @@ class train:
         print(train_out.head())
         print("#"*70)
 
-        # Export historgrams of probabilities.
-
+        # Export historgrams of probabilities
         genoML_colors = ["cyan","purple"]
 
         g = sns.FacetGrid(train_out, hue="CASE_REPORTED", palette=genoML_colors, legend_out=True,)
@@ -331,4 +330,4 @@ class train:
 
             return rfe_df
         
-            print("Feature ranks exported as", table_outfile, "if you want to be very picky and make a more parsimonious model with a minimal feature set, extract all features ranked 1 and rebuild your dataset. This analysis also gives you a concept of the relative importance of your features in the model.")
+            print(f"Feature ranks exported as {table_outfile} if you want to be very picky and make a more parsimonious model with a minimal feature set, extract all features ranked 1 and rebuild your dataset. This analysis also gives you a concept of the relative importance of your features in the model.")
