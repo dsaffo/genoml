@@ -6,7 +6,7 @@ import pandas as pd
 from genoml.preprocessing import utils
 
 class munging:
-    def __init__(self, pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, impute_type, vif, iteration, args):
+    def __init__(self, pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, run_prefix, impute_type, vif_threshold, iteration, args):
         self.pheno_path = pheno_path
         self.addit_path = addit_path
         self.gwas_path = gwas_path
@@ -16,7 +16,7 @@ class munging:
         self.gwas_df = gwas_df
         self.run_prefix = run_prefix
         self.impute_type = impute_type
-        self.vif = vif 
+        self.vif_threshold = vif_threshold
         self.iteration = iteration
         self.args = args
 
@@ -147,7 +147,83 @@ class munging:
             addit = pd.read_hdf(outfile_h5, key = "addit")
             merged = pd.merge(pheno, addit, on='ID', how='inner')
 
+            self.merged = merged  
+
         return pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, impute_type, merged
 
+    def vif_calculation(self):
+    # Initializing some variables 
+        iteration = self.iteration
+        vif_threshold = self.vif_threshold
+        merged = self.plink_inputs
+
+        # No VIF filtering should happen if the user specifies 0 for the VIF threshold/no. of iterations 
+            # Merged is not a suitable dataframe? will need to unpack the HDF5 prior to VIF 
+        if (iteration==0) or (vif_threshold==0):
+            merged.to_hdf(outfile_h5, key="dataForML")
+        else:
+            df = merged 
+
+            # Save out the IDs to be used later 
+            # Save out the phenotypes to be used later
+
+            #IDs = discrete_df['ID']
+            #PHENO = discrete_df['PHENO']
+
+            print("Stripping erroneous space, dropping non-numeric columns...") 
+            df.columns = df.columns.str.strip()
+
+            print("Drop any rows where at least one element is missing...")
+            # Convert any infinite values to NaN prior to dropping NAs
+            df.replace([np.inf, -np.inf], np.nan)
+            df.dropna(how='any', inplace=True)
+
+            print("Keeping only numerical columns...")
+            int_cols = \
+                df = df._get_numeric_data()
+
+            print("Checking datatypes...")
+            data_type = df.dtypes
+
+            # Subset df to include only relevant numerical types
+            int_cols = df.select_dtypes(include=["int", "int16", "int32", "int64", "float",
+                                                    "float16", "float32", "float64"]).shape[1]
+
+            print("Sampling 100 rows at random to reduce memory overhead...")
+            cleaned_df = df.sample(n=100).copy().reset_index()
+            cleaned_df.drop(columns=["index"], inplace=True)
+
+            print("Dropping columns that are not SNPs...")
+            cleaned_df.drop(columns=['PHENO'], axis=1, inplace=True) 
+            print("Dropped!")
+
+            print("Cleaned!")
+
+            print("")
+            print("Shuffling columns...")
+            col_names_list = cleaned_df.columns.values.tolist()
+            col_names_shuffle = random.sample(col_names_list, len(col_names_list))
+            cleaned_df = cleaned_df[col_names_shuffle]
+            print("Shuffled!")
+
+            print("Generating chunked, randomized dataframes...")
+            chunked_list = [col_names_shuffle[i * chunk_size:(i + 1) * chunk_size] for i in range((len(col_names_shuffle) + chunk_size - 1) // chunk_size)] 
+            df_list = []
+            for each_list in chunked_list: 
+                temp_df = cleaned_df[each_list].astype(float)
+                df_list.append(temp_df.copy())
+
+            no_chunks = len(df_list)
+            print(f"The number of dataframes you have moving forward is {no_chunks}")
+            print("Complete!")
+        
+            return df_list 
+
+
 #TODO: Add VIF class 
+
+############################################
+### Experimental ###########################
+############################################
+    
 
