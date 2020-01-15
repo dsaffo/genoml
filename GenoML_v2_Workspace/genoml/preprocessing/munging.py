@@ -123,4 +123,31 @@ class munging:
             print(addit_df.describe())
             print("#"*70)
 
+    # Saving out the proper HDF5 file 
+        if (self.geno_path != "nope"):
+            merged = raw_df.to_hdf(outfile_h5, key='geno')
+
+        if (self.addit_path != "nope"):
+            merged = addit_df.to_hdf(outfile_h5, key='addit')
+
+        if (self.geno_path != "nope") & (self.addit_path != "nope"):
+            pheno = pd.read_hdf(outfile_h5, key = "pheno")
+            geno = pd.read_hdf(outfile_h5, key = "geno")
+            addit = pd.read_hdf(outfile_h5, key = "addit")
+            temp = pd.merge(pheno, addit, on='ID', how='inner')
+            merged = pd.merge(temp, geno, on='ID', how='inner')
+          
+        if (self.geno_path != "nope") & (self.addit_path == "nope"):
+            pheno = pd.read_hdf(outfile_h5, key = "pheno")
+            geno = pd.read_hdf(outfile_h5, key = "geno")
+            merged = pd.merge(pheno, geno, on='ID', how='inner')
+
+        if (self.geno_path == "nope") & (self.addit_path != "nope"):
+            pheno = pd.read_hdf(outfile_h5, key = "pheno")
+            addit = pd.read_hdf(outfile_h5, key = "addit")
+            merged = pd.merge(pheno, addit, on='ID', how='inner')
+
+        return pheno_path, addit_path, gwas_path, geno_path, pheno_df, addit_df, gwas_df, impute_type, merged
+
 #TODO: Add VIF class 
+
